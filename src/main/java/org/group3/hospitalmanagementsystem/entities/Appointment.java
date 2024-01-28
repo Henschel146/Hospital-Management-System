@@ -35,11 +35,13 @@ public class Appointment {
     //PATIENT ID FOR THE APPOINTMENT
     //ONE PATIENT CAN CREATE MULTIPLE APPOINTMENT AND EACH APPOINTMENT SIGNED TO ONE PATIENT ONLY.
     @ManyToOne
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     //DOCTOR ID FOR THE APPOINTMENT
     //ONE DOCTOR CAN CREATE MULTIPLE APPOINTMENT AND EACH APPOINTMENT SIGNED TO ONE DOCTOR ONLY.
     @ManyToOne
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     //ENCAPSULATION

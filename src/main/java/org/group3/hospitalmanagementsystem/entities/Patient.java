@@ -1,6 +1,9 @@
 package org.group3.hospitalmanagementsystem.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 
@@ -11,7 +14,17 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer patientId;
 
+    private String firstname;
+
+    private String lastName;
+
     private String address;
+
+    private LocalDate dateOfBirth;
+
+    private Integer phoneNumber;
+
+    private String email;
 
     private String diagnosis;
 
@@ -19,10 +32,25 @@ public class Patient {
 
     private LocalDate modifiedDate;
 
-    @OneToOne
-    private User user;
-
     public Patient() {
+    }
+
+
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -31,6 +59,30 @@ public class Patient {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Integer getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDiagnosis() {
