@@ -1,11 +1,9 @@
 package org.group3.hospitalmanagementsystem.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Patient {
@@ -31,6 +29,16 @@ public class Patient {
     private LocalDate createdDate;
 
     private LocalDate modifiedDate;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
+    @OneToMany(mappedBy = "patient")
+    List<Appointment> appointmentsList;
+
+    @OneToMany(mappedBy = "patient")
+    List<Admission> admissionsList;
+
 
     public Patient() {
     }

@@ -3,9 +3,13 @@ package org.group3.hospitalmanagementsystem.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
+//28.01.2024 @Henschel Lungu
+//Doctor ENTITY CLASS
 @Entity
 public class Doctor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer doctorId;
@@ -23,9 +27,12 @@ public class Doctor {
     private LocalDate modifiedDate;
 
     @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-
+    @OneToMany(mappedBy = "doctor")
+    List<Appointment> appointments;
+    
     public String getAddress() {
         return address;
     }

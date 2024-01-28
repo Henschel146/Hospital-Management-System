@@ -1,9 +1,6 @@
 package org.group3.hospitalmanagementsystem.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -30,6 +27,11 @@ public class User {
 
     private LocalDate modifiedDate;
 
+    @OneToOne(mappedBy = "user")
+    Doctor doctor;
+
+    @OneToOne(mappedBy = "user")
+    Patient patient;
 
     public User() {
     }
