@@ -8,15 +8,15 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
-public class Patient {
-
+public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer patientId;
+    private Integer doctor_id;
+
 
     private String firstname;
 
-    private String lastName;
+    private String lastname;
 
     private String address;
 
@@ -26,15 +26,15 @@ public class Patient {
 
     private String email;
 
-    private String diagnosis;
+    private boolean availabityStatus;
+
+    private Integer days_available;
+
+    private String gender;
 
     private LocalDate createdDate;
 
     private LocalDate modifiedDate;
-
-    public Patient() {
-    }
-
 
 
     public String getFirstname() {
@@ -45,12 +45,12 @@ public class Patient {
         this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getAddress() {
@@ -85,12 +85,28 @@ public class Patient {
         this.email = email;
     }
 
-    public String getDiagnosis() {
-        return diagnosis;
+    public boolean isAvailabityStatus() {
+        return availabityStatus;
     }
 
-    public void setDiagnosis(String diagnosis) {
-        this.diagnosis = diagnosis;
+    public void setAvailabityStatus(boolean availabityStatus) {
+        this.availabityStatus = availabityStatus;
+    }
+
+    public Integer getDays_available() {
+        return days_available;
+    }
+
+    public void setDays_available(Integer days_available) {
+        this.days_available = days_available;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public LocalDate getCreatedDate() {
@@ -109,11 +125,11 @@ public class Patient {
         this.modifiedDate = modifiedDate;
     }
 
-    public void setPatientId(Integer patientId) {
-        this.patientId = patientId;
+    public void setDoctor_id(Integer id) {
+        this.doctor_id = id;
     }
 
-    public Integer getPatientId() {
-        return patientId;
+    public Integer getDoctor_id() {
+        return doctor_id;
     }
 }
