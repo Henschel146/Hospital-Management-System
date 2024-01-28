@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
-
+//28.01.2024 @Henschel Lungu
 @Entity
 public class Patient {
 
