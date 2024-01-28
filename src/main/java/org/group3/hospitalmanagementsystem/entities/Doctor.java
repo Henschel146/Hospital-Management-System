@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer doctor_id;
+    private Integer doctorId;
 
 
     private String firstname;
@@ -125,11 +125,11 @@ public class Doctor {
         this.modifiedDate = modifiedDate;
     }
 
-    public void setDoctor_id(Integer id) {
-        this.doctor_id = id;
+    public void setDoctorId(Integer id) {
+        this.doctorId = id;
     }
 
-    public Integer getDoctor_id() {
-        return doctor_id;
+    public Integer getDoctorId() {
+        return doctorId;
     }
 }
