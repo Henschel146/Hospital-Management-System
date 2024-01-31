@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/hospitalmanagementsystem?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: Hesowit2022@04
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  thymeleaf:
+    suffix: .html
+    prefix: classpath:/templates/
+  sql:
+    init:
+      mode: always

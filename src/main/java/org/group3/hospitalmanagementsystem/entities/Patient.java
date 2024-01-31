@@ -10,6 +10,7 @@ public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "patient_id")
     private Integer patientId;
 
     private String firstname;
@@ -30,14 +31,8 @@ public class Patient {
 
     private LocalDate modifiedDate;
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "pt_user_id", referencedColumnName = "user_id")
     User user;
-
-    @OneToMany(mappedBy = "patient")
-    List<Appointment> appointmentsList;
-
-    @OneToMany(mappedBy = "patient")
-    List<Admission> admissionsList;
 
 
     public Patient() {

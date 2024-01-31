@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface AdmissionRepository extends JpaRepository<Admission,Integer> {
 
-    List<Admission> findAll();
 
     List<Admission> findByPatient(Patient patient);
 

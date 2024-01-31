@@ -8,7 +8,7 @@ import java.util.List;
 //28.01.2024 @Henschel Lungu
 public interface PatientRepository extends JpaRepository <Patient,Integer> {
 
-    List<Patient> findAll();
+
     List<Patient> findByPatientId(Integer id);
 
 }

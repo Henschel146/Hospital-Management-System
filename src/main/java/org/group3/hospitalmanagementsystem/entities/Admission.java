@@ -10,10 +10,11 @@ public class Admission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer admission_id;
+    @Column(name = "admission_id")
+    private Integer admissionId;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "adm_patient_id", referencedColumnName = "patient_id")
     private Patient patient;
 
     @ManyToOne
@@ -107,11 +108,11 @@ public class Admission {
         this.modifiedDate = modifiedDate;
     }
 
-    public void setAdmission_id(Integer admissionId) {
-        this.admission_id = admissionId;
+    public Integer getAdmissionId() {
+        return admissionId;
     }
 
-    public Integer getAdmission_id() {
-        return admission_id;
+    public void setAdmissionId(Integer admissionId) {
+        this.admissionId = admissionId;
     }
 }

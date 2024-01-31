@@ -12,6 +12,7 @@ public class Appointment {
     //AUTO ID GENERATING WITH INTEGER
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "appointment_id")
     private Integer appointmentId;
 
     //START DATE AND TIME OF APPOINTMENT
@@ -35,13 +36,13 @@ public class Appointment {
     //PATIENT ID FOR THE APPOINTMENT
     //ONE PATIENT CAN CREATE MULTIPLE APPOINTMENT AND EACH APPOINTMENT SIGNED TO ONE PATIENT ONLY.
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "app_patient_id", referencedColumnName = "patient_id")
     private Patient patient;
 
     //DOCTOR ID FOR THE APPOINTMENT
     //ONE DOCTOR CAN CREATE MULTIPLE APPOINTMENT AND EACH APPOINTMENT SIGNED TO ONE DOCTOR ONLY.
     @ManyToOne
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "app_doctor_id", referencedColumnName = "doctor_id")
     private Doctor doctor;
 
     //ENCAPSULATION

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Integer userId;
 
     private String firstname;
@@ -26,12 +27,6 @@ public class User {
     private LocalDate createdDate;
 
     private LocalDate modifiedDate;
-
-    @OneToOne(mappedBy = "user")
-    Doctor doctor;
-
-    @OneToOne(mappedBy = "user")
-    Patient patient;
 
     public User() {
     }

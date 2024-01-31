@@ -7,6 +7,6 @@ import java.util.List;
 //28.01.2024 @Henschel Lungu
 public interface DoctorRepository extends JpaRepository<Doctor,Integer> {
 
-    List<Doctor> findAll();
+
     List<Doctor> findByDoctorId(Integer id);
 }
