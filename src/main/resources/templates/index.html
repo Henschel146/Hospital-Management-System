@@ -7,23 +7,22 @@
     <script src="/webjars/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet"
           href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/signin.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/signin.css"/>
 
 </head>
 <body class="text-center">
-<a href="welcome"> Test Thymeleaf</a>
 
 <main class="form-signin">
-    <form>
+    <form action="#" th:action="@{/sign-in}" th:object="${signInModel}" method="post">
 <!--        <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" th:field="*{email}">
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" th:field="*{password}">
             <label for="floatingPassword">Password</label>
         </div>
 
