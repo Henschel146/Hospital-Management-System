@@ -1,8 +1,7 @@
 package org.group3.hospitalmanagementsystem.service;
 
 import org.group3.hospitalmanagementsystem.entities.Admission;
-import org.group3.hospitalmanagementsystem.entities.Doctor;
-import org.group3.hospitalmanagementsystem.entities.User;
+import org.group3.hospitalmanagementsystem.model.AdmissionModel;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ public interface AdmissionService {
 
     List<Admission> findAll();
 
-    User create(Admission admission);
+    Admission create(AdmissionModel admission);
 
     Admission getAdmission(int id);
 

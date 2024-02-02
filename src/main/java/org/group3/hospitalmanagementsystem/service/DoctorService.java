@@ -2,6 +2,7 @@ package org.group3.hospitalmanagementsystem.service;
 
 import org.group3.hospitalmanagementsystem.entities.Doctor;
 import org.group3.hospitalmanagementsystem.entities.User;
+import org.group3.hospitalmanagementsystem.model.DoctorModel;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface DoctorService {
 
     List<Doctor> findAll();
 
-    User create(Doctor doctor);
+    Doctor create(DoctorModel doctor);
 
     Doctor getDoctor(int id);
 

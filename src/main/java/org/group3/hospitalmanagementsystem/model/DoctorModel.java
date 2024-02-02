@@ -1,18 +1,10 @@
-package org.group3.hospitalmanagementsystem.entities;
+package org.group3.hospitalmanagementsystem.model;
 
-import jakarta.persistence.*;
+import org.group3.hospitalmanagementsystem.entities.User;
 
 import java.time.LocalDate;
-import java.util.List;
 
-//28.01.2024 @Henschel Lungu
-//Doctor ENTITY CLASS
-@Entity
-public class Doctor {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "doctor_id")
+public class DoctorModel {
     private Integer doctorId;
 
     private String address;
@@ -27,16 +19,29 @@ public class Doctor {
 
     private LocalDate modifiedDate;
 
-    @OneToOne
-    @JoinColumn(name = "doc_user_id", referencedColumnName = "user_id")
-    private User user;
+    private Integer userId;
 
-    public User getUser() {
-        return user;
+
+    public DoctorModel() {
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public DoctorModel(Integer doctorId, String address, boolean availabilityStatus, Integer days_available, String gender, LocalDate createdDate, LocalDate modifiedDate, Integer userId) {
+        this.doctorId = doctorId;
+        this.address = address;
+        this.availabilityStatus = availabilityStatus;
+        this.days_available = days_available;
+        this.gender = gender;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+        this.userId = userId;
+    }
+
+    public Integer getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Integer doctorId) {
+        this.doctorId = doctorId;
     }
 
     public String getAddress() {
@@ -51,8 +56,8 @@ public class Doctor {
         return availabilityStatus;
     }
 
-    public void setAvailabilityStatus(boolean availabityStatus) {
-        this.availabilityStatus = availabityStatus;
+    public void setAvailabilityStatus(boolean availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
     }
 
     public Integer getDays_available() {
@@ -87,11 +92,11 @@ public class Doctor {
         this.modifiedDate = modifiedDate;
     }
 
-    public void setDoctorId(Integer id) {
-        this.doctorId = id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public Integer getDoctorId() {
-        return doctorId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
