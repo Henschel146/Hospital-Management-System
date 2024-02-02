@@ -30,9 +30,6 @@ public class Patient {
     private LocalDate createdDate;
 
     private LocalDate modifiedDate;
-    @OneToOne
-    @JoinColumn(name = "pt_user_id", referencedColumnName = "user_id")
-    User user;
 
 
     public Patient() {
