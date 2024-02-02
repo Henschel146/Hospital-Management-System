@@ -1,20 +1,18 @@
 package org.group3.hospitalmanagementsystem.controller;
 
-import org.group3.hospitalmanagementsystem.entities.Appointment;
 import org.group3.hospitalmanagementsystem.entities.User;
-import org.group3.hospitalmanagementsystem.model.SignIn;
-import org.group3.hospitalmanagementsystem.service.AppointmentService;
 import org.group3.hospitalmanagementsystem.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.NoSuchElementException;
 
 @Controller
 public class UserController {
@@ -30,8 +28,6 @@ public class UserController {
         List<User> users = new ArrayList<>();
         users = userService.findAll();
         model.addAttribute("users",users );
-
-
         return "users";
     }
     @GetMapping("/user/add")
@@ -40,14 +36,35 @@ public class UserController {
         return "userAdd";
     }
 
-    @PostMapping("/users/addorUpdate")
-    public String addOrUpdate(@ModelAttribute("user") User user){
+    @GetMapping("/user/edit/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        User user = userService.findById(id).orElseThrow( () -> new NoSuchElementException("User with ID " + id + " not found"));
+        model.addAttribute("user",user);
+        return "userUpdate";
+    }
+
+    @GetMapping("/user/delete/{id}")
+    public String delete(@PathVariable("id") Integer id, Model model) {
+        User user = userService.findById(id).orElseThrow( () -> new NoSuchElementException("User with ID " + id + " not found"));
+        userService.delete(id);
+        return "redirect:/user";
+    }
+
+    @PostMapping("/users/add")
+    public String addNewUser(@ModelAttribute("user") User user){
         user.setCreatedDate(LocalDate.now());
         user.setModifiedDate(LocalDate.now());
         User createdUser =  userService.create(user);
         System.out.println("User Created");
-        return "users";
+        return "redirect:/user";
     }
 
+    @PostMapping("/users/update")
+    public String updateUser(@ModelAttribute("user") User user){
+        user.setModifiedDate(LocalDate.now());
+        User updatedUser =  userService.update(user);
+        System.out.println("User Created");
+        return "redirect:/user";
+    }
 
 }

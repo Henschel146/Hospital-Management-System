@@ -28,8 +28,11 @@ public class Doctor {
     private LocalDate modifiedDate;
 
     @OneToOne
-    @JoinColumn(name = "doc_user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "doc_user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
     private User user;
+
+    @Column(name = "doc_user_id")
+    private Integer user_id;
 
     public User getUser() {
         return user;
@@ -47,12 +50,12 @@ public class Doctor {
         this.address = address;
     }
 
-    public boolean isAvailabilityStatus() {
+    public boolean getAvailabilityStatus() {
         return availabilityStatus;
     }
 
-    public void setAvailabilityStatus(boolean availabityStatus) {
-        this.availabilityStatus = availabityStatus;
+    public void setAvailabilityStatus(boolean availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
     }
 
     public Integer getDays_available() {
@@ -93,5 +96,13 @@ public class Doctor {
 
     public Integer getDoctorId() {
         return doctorId;
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 }
