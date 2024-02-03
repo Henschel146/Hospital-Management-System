@@ -20,50 +20,84 @@
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="canvas-wrapper">
-                    <h2>Add Doctor</h2>
-                    <form class="needs-validation" action="#" th:action="@{/doctor/add}" th:object="${doctor}"
+                    <h2>Update Appointment</h2>
+                    <form class="needs-validation" action="#" th:action="@{/appointment/update}" th:object="${appointment}"
                           method="post">
                         <div class="row">
 
                             <div class="col-md-5 col-lg-6">
                                 <br>
+                                <input type="number" th:field="*{appointmentId}" hidden>
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
-                                        <label for="user" class="form-label">User<span class="text-red">*</span></label>
+                                        <label for="patient" class="form-label">Patient<span class="text-red">*</span></label>
                                     </div>
                                     <div class="col-md-9">
-                                        <select id="user"  th:field="*{user_id}" class="form-select" required>
-                                            <option th:each="user : ${users}" th:value="${user.userId}" th:text="${user.firstname + ' ' + user.lastName}"></option>
+                                        <select id="patient"  th:field="*{appointment_patient_id}" class="form-select" required>
+                                            <option th:each="patient : ${patients}" th:value="${patient.patientId}" th:text="${patient.firstname + ' ' + patient.lastName}"></option>
                                         </select>
-                                        <div class="invalid-feedback">Invalid User</div>
+                                        <div class="invalid-feedback">Invalid Patient</div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-3 align-items-center">
+                                        <label for="doctor" class="form-label">Doctor<span class="text-red">*</span></label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select id="doctor"  th:field="*{appointment_doctor_id}" class="form-select" required>
+                                            <option th:each="doctor : ${doctors}" th:value="${doctor.doctorId}" th:text="${doctor.user.firstname + ' ' + doctor.user.lastName}"></option>
+                                        </select>
+                                        <div class="invalid-feedback">Invalid Doctor</div>
                                     </div>
                                 </div>
 
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
-                                        <label for="availability" class="form-label">Availability Status</label>
+                                        <label for="startTime" class="form-label">Start Time
+                                            <span class="text-red">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
-                                            <input type="checkbox" class="checkboxes" id="availability" th:checked="${doctor.availabilityStatus}" />
+                                            <input type="datetime-local" class="form-control"
+                                                   id="startTime"
+                                                   th:field="*{startTime}"
+                                                   required >
+                                            <div class="invalid-feedback">Invalid Appointment Start Time
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-
-
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-3 align-items-center">
+                                        <label for="endTime" class="form-label">End Time
+                                            <span class="text-red">*</span></label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div>
+                                            <input type="datetime-local" class="form-control"
+                                                   id="endTime"
+                                                   th:field="*{endTime}"
+                                                   required >
+                                            <div class="invalid-feedback">Invalid Appointment End Time
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
-                                        <label for="daysAvailable" class="form-label">Days Available
+                                        <label for="roomNumber" class="form-label">Room Number
                                             <span
                                                     class="text-red">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
                                             <input type="number" class="form-control"
-                                                   id="daysAvailable"
-                                                   th:field="*{days_available}"
+                                                   id="roomNumber"
+                                                   th:field="*{roomNumber}"
                                                    required>
                                             <div class="invalid-feedback">Invalid Value
                                             </div>
@@ -71,39 +105,20 @@
                                     </div>
                                 </div>
 
-                                    <div class="row g-3 mb-3">
-                                        <div class="col-md-3 align-items-center">
-                                            <label for="gender" class="form-label">Gender
-                                                <span
-                                                        class="text-red">*</span></label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <div>
-                                                <input type="text" class="form-control"
-                                                       id="gender"
-                                                       name="email" min="0"
-                                                       th:field="*{gender}"
-                                                       required>
-                                                <div class="invalid-feedback">Invalid Value
-                                                </div>
-                                            </div>
-                                        </div>
 
-
-                                    </div>
 
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
-                                        <label for="address" class="form-label">Address
+                                        <label for="notes" class="form-label">Notes
                                             <span
                                                     class="text-red">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
                                             <input type="text" class="form-control"
-                                                   id="address"
+                                                   id="notes"
                                                    name="email" min="0"
-                                                   th:field="*{address}"
+                                                   th:field="*{notes}"
                                                    required>
                                             <div class="invalid-feedback">Invalid Value
                                             </div>
@@ -114,16 +129,16 @@
                                 </div>
 
 
-                                </div>
-
                             </div>
 
+                        </div>
 
-                            <button class="w-100 btn btn-sm btn-primary btn-lg"
-                                    type="submit">
-                                <i data-feather="check-circle" class="data-feather mr-1"></i>
-                                Save Doctor
-                            </button>
+
+                        <button class="w-100 btn btn-sm btn-primary btn-lg"
+                                type="submit">
+                            <i data-feather="check-circle" class="data-feather mr-1"></i>
+                            Update Appointment
+                        </button>
 
                     </form>
                 </div>

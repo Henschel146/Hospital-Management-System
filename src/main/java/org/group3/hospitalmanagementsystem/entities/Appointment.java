@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Appointment {
     //AUTO ID GENERATING WITH INTEGER
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "appointment_id")
     private Integer appointmentId;
 
@@ -36,14 +36,19 @@ public class Appointment {
     //PATIENT ID FOR THE APPOINTMENT
     //ONE PATIENT CAN CREATE MULTIPLE APPOINTMENT AND EACH APPOINTMENT SIGNED TO ONE PATIENT ONLY.
     @ManyToOne
-    @JoinColumn(name = "app_patient_id", referencedColumnName = "patient_id")
+    @JoinColumn(name = "app_patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
     private Patient patient;
 
+    @Column(name = "app_patient_id")
+    private Integer appointment_patient_id;
     //DOCTOR ID FOR THE APPOINTMENT
     //ONE DOCTOR CAN CREATE MULTIPLE APPOINTMENT AND EACH APPOINTMENT SIGNED TO ONE DOCTOR ONLY.
     @ManyToOne
-    @JoinColumn(name = "app_doctor_id", referencedColumnName = "doctor_id")
+    @JoinColumn(name = "app_doctor_id", referencedColumnName = "doctor_id", insertable = false, updatable = false)
     private Doctor doctor;
+
+    @Column(name = "app_doctor_id")
+    private Integer appointment_doctor_id;
 
     //ENCAPSULATION
 
@@ -132,5 +137,21 @@ public class Appointment {
 
     public Integer getAppointmentId() {
         return appointmentId;
+    }
+
+    public Integer getAppointment_patient_id() {
+        return appointment_patient_id;
+    }
+
+    public void setAppointment_patient_id(Integer appointment_patient_id) {
+        this.appointment_patient_id = appointment_patient_id;
+    }
+
+    public Integer getAppointment_doctor_id() {
+        return appointment_doctor_id;
+    }
+
+    public void setAppointment_doctor_id(Integer appointment_doctor_id) {
+        this.appointment_doctor_id = appointment_doctor_id;
     }
 }

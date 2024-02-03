@@ -7,38 +7,64 @@
     <script src="webjars/jquery/3.7.1/jquery.min.js"></script>
     <script src="webjars/popper.js/1.12.9-1/umd/popper.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/sidebars.css"/>
+    <script src="/js/feather.min.js"></script>
+
 </head>
 <body>
 
 
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div th:insert="sidebar.html :: sidebar"></div>
+    <div class="content" id="content">
+        <div class="container-fluid">
+            <h2 class="mb-3 mt-3">Appointments</h2>
+            <a th:href="@{/appointment/add}" class="btn btn-primary mb-3"> Schedule Appointment</a>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div th:insert="sidebar.html :: sidebar"></div>
-        <div class="content" id="content">
-            <div class="container-fluid">
-            <h2>Appointments</h2>
-                <button class="btn btn-primary"> Add Appointment</button>
-
-                <table border="1">
-                    <thead>
-                    <tr>
-                        <th>Data</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="appointment : ${appointments}">
-                        <td th:text="${appointment}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="table no-margin  table-bordered table-striped" >
+                <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Room Number</th>
+                    <th>Notes</th>
+                    <th>Created Date</th>
+                    <th>Modified Date</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appointment : ${appointments}">
+                    <td th:text="${appointment.patient.firstname}"></td>
+                    <td th:text="${appointment.doctor.user.firstname}"></td>
+                    <td th:text="${#temporals.format(appointment.startTime, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${#temporals.format(appointment.endTime, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${appointment.roomNumber}"></td>
+                    <td th:text="${appointment.notes}"></td>
+                    <td th:text="${appointment.createdDate}"></td>
+                    <td th:text="${appointment.modifiedDate}"></td>
+                    <td> <a th:href="@{/appointment/edit/{id}(id=${appointment.appointmentId})}">
+                        <i style="color: black;" data-feather="edit"></i>
+                    </a>
+                        <a th:href="@{/appointment/delete/{id}(id=${appointment.appointmentId})}" onclick="return confirm('Are you sure?')">
+                            <i style="color: red;"  data-feather="trash-2"></i>
+                        </a></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
 
 
-    </main>
+</main>
 
 
 <script src="webjars/bootstrap/5.3.2/js/bootstrap.min.js"></script>
 <script src="/js/sidebars.js"></script>
+<script>
+    // Initialize Feather icons
+    feather.replace();
+</script>
 </body>
 </html>

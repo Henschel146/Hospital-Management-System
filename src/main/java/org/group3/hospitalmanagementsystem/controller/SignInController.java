@@ -31,9 +31,9 @@ public class SignInController {
         System.out.println(user.getUserId());
 
         if( user.getEmail().equals(signIn.getEmail()) && user.getPassword().equals(signIn.getPassword())){
-            return "/appointment";
+            return "redirect:/appointments";
         }
-        return "redirect:index";
+        return "redirect:/";
     }
 
 }
