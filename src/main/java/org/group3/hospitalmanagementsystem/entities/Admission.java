@@ -14,12 +14,18 @@ public class Admission {
     private Integer admissionId;
 
     @ManyToOne
-    @JoinColumn(name = "adm_patient_id", referencedColumnName = "patient_id")
+    @JoinColumn(name = "adm_patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
     private Patient patient;
 
+    @Column(name = "adm_patient_id")
+    private Integer admission_patient_id;
+
     @ManyToOne
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "adm_doctor_id", referencedColumnName = "doctor_id", insertable = false, updatable = false)
     private Doctor doctor;
+
+    @Column(name = "adm_doctor_id")
+    private Integer admission_doctor_id;
 
     private LocalDate admissionDate;
 
@@ -114,5 +120,21 @@ public class Admission {
 
     public void setAdmissionId(Integer admissionId) {
         this.admissionId = admissionId;
+    }
+
+    public Integer getAdmission_patient_id() {
+        return admission_patient_id;
+    }
+
+    public void setAdmission_patient_id(Integer admission_patient_id) {
+        this.admission_patient_id = admission_patient_id;
+    }
+
+    public Integer getAdmission_doctor_id() {
+        return admission_doctor_id;
+    }
+
+    public void setAdmission_doctor_id(Integer admission_doctor_id) {
+        this.admission_doctor_id = admission_doctor_id;
     }
 }

@@ -1,9 +1,6 @@
 package org.group3.hospitalmanagementsystem.service;
 
 import org.group3.hospitalmanagementsystem.entities.Appointment;
-import org.group3.hospitalmanagementsystem.entities.Doctor;
-import org.group3.hospitalmanagementsystem.entities.User;
-
 import java.util.List;
 import java.util.Optional;
 

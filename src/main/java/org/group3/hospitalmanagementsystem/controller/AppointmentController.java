@@ -36,6 +36,8 @@ public class AppointmentController {
     }
 
 
+
+
     @GetMapping("/appointments")
     public String showAppointments(Model model) {
 
@@ -83,7 +85,7 @@ public class AppointmentController {
 
 
     @PostMapping("/appointment/add")
-    public Object addDoctor(@ModelAttribute("appointment") Appointment appointment){
+    public Object addAppointment(@ModelAttribute("appointment") Appointment appointment){
         appointment.setCreatedDate(LocalDate.now());
         appointment.setModifiedDate(LocalDate.now());
         Appointment appointmentCreated = appointmentService.create(appointment);
@@ -91,7 +93,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/appointment/update")
-    public String updateDoctor(@ModelAttribute("appointment") Appointment appointment){
+    public String updateAppointment(@ModelAttribute("appointment") Appointment appointment){
         appointment.setModifiedDate(LocalDate.now());
         Appointment appointmentUpdated =  appointmentService.update(appointment);
         System.out.println("Appointment Created");

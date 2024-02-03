@@ -1,8 +1,6 @@
 package org.group3.hospitalmanagementsystem.service;
 
 import org.group3.hospitalmanagementsystem.entities.Appointment;
-import org.group3.hospitalmanagementsystem.entities.Doctor;
-import org.group3.hospitalmanagementsystem.entities.User;
 import org.group3.hospitalmanagementsystem.repository.AppointmentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

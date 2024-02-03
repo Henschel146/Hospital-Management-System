@@ -1,15 +1,14 @@
 package org.group3.hospitalmanagementsystem.service;
 
 import org.group3.hospitalmanagementsystem.entities.Admission;
-import org.group3.hospitalmanagementsystem.model.AdmissionModel;
-
 import java.util.List;
+import java.util.Optional;
 
 public interface AdmissionService {
 
     List<Admission> findAll();
 
-    Admission create(AdmissionModel admission);
+    Admission create(Admission admission);
 
     Admission getAdmission(int id);
 
@@ -18,6 +17,8 @@ public interface AdmissionService {
     void batch();
 
     void delete(int id);
+
+    Optional<Admission> findByAdmissionId(Integer id);
 
 
 }
