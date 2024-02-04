@@ -2,12 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Appointments</title>
     <link href="webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="webjars/jquery/3.7.1/jquery.min.js"></script>
     <script src="webjars/popper.js/1.12.9-1/umd/popper.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/sidebars.css"/>
     <script src="/js/feather.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var path = window.location.pathname;
+            console.log(path);
+            var links = document.querySelectorAll('.nav-link');
+
+            links.forEach(function(link) {
+                if (link.getAttribute('href') === path) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -18,7 +31,7 @@
     <div class="content" id="content">
         <div class="container-fluid">
             <h2 class="mb-3 mt-3">Appointments</h2>
-            <a th:href="@{/appointment/add}" class="btn btn-primary mb-3"> Schedule Appointment</a>
+            <a th:href="@{/appointment/add}" class="btn btn-primary mb-3"> <i data-feather="plus-circle"></i> Schedule Appointment</a>
 
             <table class="table no-margin  table-bordered table-striped" >
                 <thead>

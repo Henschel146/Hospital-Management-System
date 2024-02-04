@@ -11,6 +11,7 @@
     <script src="webjars/popper.js/1.12.9-1/umd/popper.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/sidebars.css"/>
     <script src="/js/moment.min.js"></script>
+    <script src="/js/feather.min.js"></script>
 </head>
 <body>
 
@@ -133,8 +134,7 @@
 
                         </div>
 
-
-                        <button class="w-100 btn btn-sm btn-primary btn-lg"
+                        <button class="btn btn-primary btn-lg w-auto btn-sm"
                                 type="submit">
                             <i data-feather="check-circle" class="data-feather mr-1"></i>
                             Save Appointment
@@ -161,6 +161,10 @@
         crossorigin="anonymous"></script>
 <script>
     $('#datetimepicker').datetimepicker();
+</script>
+<script>
+    // Initialize Feather icons
+    feather.replace();
 </script>
 </body>
 </html>
