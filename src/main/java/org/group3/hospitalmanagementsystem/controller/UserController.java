@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -39,6 +40,11 @@ public class UserController {
     @GetMapping("/user/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         User user = userService.findById(id).orElseThrow( () -> new NoSuchElementException("User with ID " + id + " not found"));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = user.getDateOfBirth().format(formatter);
+        user.setDateOfBirthString(formattedDate);
+
         model.addAttribute("user",user);
         return "userUpdate";
     }
@@ -55,15 +61,20 @@ public class UserController {
         user.setCreatedDate(LocalDate.now());
         user.setModifiedDate(LocalDate.now());
         User createdUser =  userService.create(user);
-        System.out.println("User Created");
+
         return "redirect:/user";
     }
 
     @PostMapping("/users/update")
     public String updateUser(@ModelAttribute("user") User user){
         user.setModifiedDate(LocalDate.now());
+
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateOfBirth = LocalDate.parse(user.getDateOfBirthString(), formatter);
+        user.setDateOfBirth(dateOfBirth);
+
         User updatedUser =  userService.update(user);
-        System.out.println("User Created");
         return "redirect:/user";
     }
 

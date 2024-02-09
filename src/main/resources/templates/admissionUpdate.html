@@ -35,9 +35,7 @@
                     <label for="patient" class="form-label">Patient<span class="text-red">*</span></label>
                   </div>
                   <div class="col-md-9">
-                    <select id="patient"  th:field="*{admission_patient_id}" class="form-select" disabled>
-                      <option th:each="patient : ${patients}" th:value="${patient.patientId}" th:text="${patient.firstname + ' ' + patient.lastName}"></option>
-                    </select>
+                    <span class="form-control" id="patient" th:text="${admission.patient.firstname + ' ' + admission.patient.lastName}"></span>
                     <div class="invalid-feedback">Invalid Patient</div>
                   </div>
                 </div>
@@ -61,14 +59,7 @@
                       <span class="text-red">*</span></label>
                   </div>
                   <div class="col-sm-9">
-                    <div class="input-group date" id="datetimepicker">
-                      <input type="date" class="form-control"
-                             id="admissionDate"
-                             th:field="*{admissionDate}"
-                             required>
-                      <div class="invalid-feedback">Invalid Admission Date
-                      </div>
-                    </div>
+                      <span class="form-control" id="admissionDate" th:text="${admission.admissionDateString}"></span>
                   </div>
                 </div>
 
@@ -123,7 +114,7 @@
                       <input type="date" class="form-control"
                              id="dischargeDate"
                              th:field="*{dischargeDate}"
-                             required>
+                             >
                       <div class="invalid-feedback">Invalid Discharge Date
                       </div>
                     </div>

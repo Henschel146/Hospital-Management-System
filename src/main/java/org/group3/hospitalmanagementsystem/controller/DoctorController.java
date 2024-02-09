@@ -69,7 +69,6 @@ public class DoctorController {
     public String updateDoctor(@ModelAttribute("doctor") Doctor doctor){
         doctor.setModifiedDate(LocalDate.now());
         Doctor updatedDoctor =  doctorService.update(doctor);
-        System.out.println("User Created");
-        return "redirect:/user";
+        return "redirect:/doctors";
     }
 }

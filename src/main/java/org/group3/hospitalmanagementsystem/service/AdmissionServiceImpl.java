@@ -61,7 +61,6 @@ public class AdmissionServiceImpl implements AdmissionService {
         Admission existingAdmission = admissionRepository.findByAdmissionId(admission.getAdmissionId()).orElseThrow( () -> new NoSuchElementException("Admission with ID " + admission.getAdmissionId() + " not found"));
         existingAdmission.setModifiedDate(LocalDate.now());
         existingAdmission.setAdmission_doctor_id(admission.getAdmission_doctor_id());
-        existingAdmission.setAdmissionDate(admission.getAdmissionDate());
         existingAdmission.setAdmissionReason(admission.getAdmissionReason());
         existingAdmission.setDischargeDate(admission.getDischargeDate());
         existingAdmission.setRoomNumber(admission.getRoomNumber());

@@ -24,6 +24,9 @@ public class User {
 
     private LocalDate dateOfBirth;
 
+    @Transient
+    private String dateOfBirthString;
+
     private LocalDate createdDate;
 
     private LocalDate modifiedDate;
@@ -115,5 +118,11 @@ public class User {
         return userId;
     }
 
+    public String getDateOfBirthString() {
+        return dateOfBirthString;
+    }
 
+    public void setDateOfBirthString(String dateOfBirthString) {
+        this.dateOfBirthString = dateOfBirthString;
+    }
 }

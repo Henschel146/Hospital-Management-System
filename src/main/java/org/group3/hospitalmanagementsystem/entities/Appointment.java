@@ -18,8 +18,14 @@ public class Appointment {
     //START DATE AND TIME OF APPOINTMENT
     private LocalDateTime startTime;
 
+    @Transient
+    private String startTimeString;
+
     //END DATE AND TIME OF APPOINTMENT
     private LocalDateTime endTime;
+
+    @Transient
+    private String endTimeString;
 
     //ASSIGNED ROOM NUMBER FOR THE APPOINTMENT
     private int roomNumber;
@@ -153,5 +159,21 @@ public class Appointment {
 
     public void setAppointment_doctor_id(Integer appointment_doctor_id) {
         this.appointment_doctor_id = appointment_doctor_id;
+    }
+
+    public String getStartTimeString() {
+        return startTimeString;
+    }
+
+    public void setStartTimeString(String startTimeString) {
+        this.startTimeString = startTimeString;
+    }
+
+    public String getEndTimeString() {
+        return endTimeString;
+    }
+
+    public void setEndTimeString(String endTimeString) {
+        this.endTimeString = endTimeString;
     }
 }

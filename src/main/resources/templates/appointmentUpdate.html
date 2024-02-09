@@ -29,22 +29,27 @@
                             <div class="col-md-5 col-lg-6">
                                 <br>
                                 <input type="number" th:field="*{appointmentId}" hidden>
+
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
-                                        <label for="patient" class="form-label">Patient<span class="text-red">*</span></label>
+                                        <label for="patient" class="form-label">Patient
+                                            <span
+                                                    class="text-red">*</span></label>
                                     </div>
-                                    <div class="col-md-9">
-                                        <select id="patient"  th:field="*{appointment_patient_id}" class="form-select" required>
-                                            <option th:each="patient : ${patients}" th:value="${patient.patientId}" th:text="${patient.firstname + ' ' + patient.lastName}"></option>
-                                        </select>
-                                        <div class="invalid-feedback">Invalid Patient</div>
+                                    <div class="col-sm-9">
+                                        <div>
+                                            <span class="form-control" id="patient" th:text="${appointment.patient.firstname + ' ' + appointment.patient.lastName}"></span>
+                                            <div class="invalid-feedback">Invalid Value
+                                            </div>
+                                        </div>
                                     </div>
+
+
                                 </div>
 
-
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
-                                        <label for="doctor" class="form-label">Doctor<span class="text-red">*</span></label>
+                                        <label for="doctor" class="form-label">Doctor <span class="text-red">*</span></label>
                                     </div>
                                     <div class="col-md-9">
                                         <select id="doctor"  th:field="*{appointment_doctor_id}" class="form-select" required>
@@ -63,7 +68,7 @@
                                         <div>
                                             <input type="datetime-local" class="form-control"
                                                    id="startTime"
-                                                   th:field="*{startTime}"
+                                                   th:field="*{startTimeString}"
                                                    required >
                                             <div class="invalid-feedback">Invalid Appointment Start Time
                                             </div>
@@ -80,7 +85,7 @@
                                         <div>
                                             <input type="datetime-local" class="form-control"
                                                    id="endTime"
-                                                   th:field="*{endTime}"
+                                                   th:field="*{endTimeString}"
                                                    required >
                                             <div class="invalid-feedback">Invalid Appointment End Time
                                             </div>

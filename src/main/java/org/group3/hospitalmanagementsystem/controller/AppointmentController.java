@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -64,6 +66,14 @@ public class AppointmentController {
     @GetMapping("/appointment/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Appointment appointment = appointmentService.findByAppointmentId(id).orElseThrow( () -> new NoSuchElementException("Appointment with ID " + id + " not found"));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String formattedStartTime = appointment.getStartTime().format(formatter);
+        appointment.setStartTimeString(formattedStartTime);
+
+        String formattedEndTime = appointment.getEndTime().format(formatter);
+        appointment.setEndTimeString(formattedEndTime);
+
         model.addAttribute("appointment",appointment);
 
         List<Doctor> doctors = doctorService.findAll();
@@ -94,7 +104,19 @@ public class AppointmentController {
 
     @PostMapping("/appointment/update")
     public String updateAppointment(@ModelAttribute("appointment") Appointment appointment){
+
+
         appointment.setModifiedDate(LocalDate.now());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime startTime = LocalDateTime.parse(appointment.getStartTimeString(), formatter);
+        appointment.setStartTime(startTime);
+
+
+        LocalDateTime endTime = LocalDateTime.parse(appointment.getEndTimeString(), formatter);
+        appointment.setEndTime(endTime);
+
+
         Appointment appointmentUpdated =  appointmentService.update(appointment);
         System.out.println("Appointment Created");
         return "redirect:/appointments";

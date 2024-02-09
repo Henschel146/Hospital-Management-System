@@ -55,7 +55,6 @@ public class PatientController {
         patient.setCreatedDate(LocalDate.now());
         patient.setModifiedDate(LocalDate.now());
         Patient createdPatient =  patientService.create(patient);
-        System.out.println("Patient Created");
         return "redirect:/patients";
     }
 
@@ -63,7 +62,6 @@ public class PatientController {
     public String updateUser(@ModelAttribute("patient") Patient patient){
         patient.setModifiedDate(LocalDate.now());
         Patient updatedPatient =  patientService.update(patient);
-        System.out.println("patient Created");
         return "redirect:/patients";
     }
 

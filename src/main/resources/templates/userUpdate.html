@@ -31,7 +31,7 @@
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
                                         <label for="firstName" class="form-label">First Name <span
-                                                class="text-red">*</span></label>
+                                                style="color: red;">*</span></label>
                                     </div>
                                     <input type="number" th:field="*{userId}" hidden>
                                     <div class="col-md-9">
@@ -48,7 +48,7 @@
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
                                         <label for="lastName" class="form-label">Last Name <span
-                                                class="text-red">*</span></label>
+                                                style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
@@ -65,7 +65,7 @@
                                     <div class="col-md-3 align-items-center">
                                         <label for="phoneNumber" class="form-label">Phone Number
                                             <span
-                                                    class="text-red">*</span></label>
+                                                    style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
@@ -84,13 +84,12 @@
                                     <div class="col-md-3 align-items-center">
                                         <label for="email" class="form-label">Email
                                             <span
-                                                    class="text-red">*</span></label>
+                                                    style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
                                             <input type="email" class="form-control"
                                                    id="email"
-                                                   name="email" min="0"
                                                    th:field="*{email}"
                                                    required>
                                             <div class="invalid-feedback">Invalid Email
@@ -101,14 +100,14 @@
                                     <div class="row g-3 mb-3">
                                         <div class="col-md-3 align-items-center">
                                             <label for="dateOfBirth" class="form-label">Date Of Birth
-                                                <span class="text-red">*</span></label>
+                                                <span style="color: red;">*</span></label>
                                         </div>
                                         <div class="col-sm-9">
                                             <div>
                                                 <input type="date" class="form-control"
                                                        id="dateOfBirth"
-                                                       th:field="*{dateOfBirth}"
-                                                       required date="dd/mm/yyyy">
+                                                       th:field="*{dateOfBirthString}"
+                                                        required>
                                                 <div class="invalid-feedback">Invalid Promotion Start Date
                                                 </div>
                                             </div>
@@ -119,13 +118,12 @@
                                         <div class="col-md-3 align-items-center">
                                             <label for="password" class="form-label">Password
                                                 <span
-                                                        class="text-red">*</span></label>
+                                                        style="color: red;">*</span></label>
                                         </div>
                                         <div class="col-sm-9">
                                             <div>
                                                 <input type="password" class="form-control"
                                                        id="password"
-                                                       name="email" min="0"
                                                        th:field="*{password}"
                                                        required>
                                                 <div class="invalid-feedback">Invalid Password

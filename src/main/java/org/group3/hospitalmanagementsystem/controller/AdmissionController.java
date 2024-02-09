@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -56,6 +57,11 @@ public class AdmissionController {
     @GetMapping("/admission/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Admission admission = admissionService.findByAdmissionId(id).orElseThrow( () -> new NoSuchElementException("Admission with ID " + id + " not found"));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = admission.getAdmissionDate().format(formatter);
+        admission.setAdmissionDateString(formattedDate);
+
         model.addAttribute("admission",admission);
 
         List<Doctor> doctors = doctorService.findAll();
@@ -86,7 +92,6 @@ public class AdmissionController {
     public String updateAdmission(@ModelAttribute("admission") Admission admission){
         admission.setModifiedDate(LocalDate.now());
         Admission admissionUpdated =  admissionService.update(admission);
-        System.out.println("Admission Created");
         return "redirect:/admissions";
     }
 

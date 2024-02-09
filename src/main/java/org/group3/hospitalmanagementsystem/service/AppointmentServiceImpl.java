@@ -39,7 +39,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         Appointment existingAppointment = appointmentRepository.findByAppointmentId(appointment.getAppointmentId()).orElseThrow( () -> new NoSuchElementException("Appointment with ID " + appointment.getAppointmentId() + " not found"));
         existingAppointment.setModifiedDate(LocalDate.now());
         existingAppointment.setAppointment_doctor_id(appointment.getAppointment_doctor_id());
-        existingAppointment.setAppointment_patient_id(appointment.getAppointment_patient_id());
         existingAppointment.setEndTime(appointment.getEndTime());
         existingAppointment.setStartTime(appointment.getStartTime());
         existingAppointment.setNotes(appointment.getNotes());

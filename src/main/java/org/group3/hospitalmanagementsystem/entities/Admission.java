@@ -29,6 +29,9 @@ public class Admission {
 
     private LocalDate admissionDate;
 
+    @Transient
+    private String admissionDateString;
+
     private  Integer roomNumber;
 
     private Integer admissionStatus;
@@ -136,5 +139,13 @@ public class Admission {
 
     public void setAdmission_doctor_id(Integer admission_doctor_id) {
         this.admission_doctor_id = admission_doctor_id;
+    }
+
+    public String getAdmissionDateString() {
+        return admissionDateString;
+    }
+
+    public void setAdmissionDateString(String admissionDateString) {
+        this.admissionDateString = admissionDateString;
     }
 }
