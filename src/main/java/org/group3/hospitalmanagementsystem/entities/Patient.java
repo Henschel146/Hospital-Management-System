@@ -21,6 +21,12 @@ public class Patient {
 
     private LocalDate dateOfBirth;
 
+    @Transient
+    private String dateOfBirthString;
+
+    @Transient
+    private int age;
+
     private Integer phoneNumber;
 
     private String email;
@@ -115,5 +121,21 @@ public class Patient {
 
     public Integer getPatientId() {
         return patientId;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getDateOfBirthString() {
+        return dateOfBirthString;
+    }
+
+    public void setDateOfBirthString(String dateOfBirthString) {
+        this.dateOfBirthString = dateOfBirthString;
     }
 }

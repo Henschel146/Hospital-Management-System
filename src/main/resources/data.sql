@@ -1,1 +1,1 @@
-INSERT INTO user (`phone_number`, `email`, `firstname`, `last_name`, `password`) VALUES ('787878', 'lunguhenschel@gmail.com', 'Henschel', 'Lungu', '1234');
+INSERT INTO `hospitalmanagementsystem`.`user` (`created_date`, `date_of_birth`, `modified_date`, `phone_number`, `email`, `firstname`, `last_name`, `password`) VALUES ('2024-02-10', '1999-02-10', '2024-02-10', '782332823', 'lunguhenschel@gmail.com', 'Henschel', 'Lungu', '1234');

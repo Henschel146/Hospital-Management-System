@@ -31,7 +31,7 @@
                                 <input type="number" th:field="*{doctorId}" hidden>
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
-                                        <label for="user" class="form-label">User<span class="text-red">*</span></label>
+                                        <label for="user" class="form-label">User<span style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-md-9">
                                         <select id="user"  class="form-select" th:field="*{user_id}" required>
@@ -56,7 +56,7 @@
                                     <div class="col-md-3 align-items-center">
                                         <label for="daysAvailable" class="form-label">Days Available
                                             <span
-                                                    class="text-red">*</span></label>
+                                                    style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
@@ -74,13 +74,12 @@
                                     <div class="col-md-3 align-items-center">
                                         <label for="gender" class="form-label">Gender
                                             <span
-                                                    class="text-red">*</span></label>
+                                                    style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
                                             <input type="text" class="form-control"
                                                    id="gender"
-                                                   name="email" min="0"
                                                    th:field="*{gender}"
                                                    required>
                                             <div class="invalid-feedback">Invalid Value
@@ -92,13 +91,12 @@
                                         <div class="col-md-3 align-items-center">
                                             <label for="address" class="form-label">Address
                                                 <span
-                                                        class="text-red">*</span></label>
+                                                        style="color: red;">*</span></label>
                                         </div>
                                         <div class="col-sm-9">
                                             <div>
                                                 <input type="text" class="form-control"
                                                        id="address"
-                                                       name="email" min="0"
                                                        th:field="*{address}"
                                                        required>
                                                 <div class="invalid-feedback">Invalid Value

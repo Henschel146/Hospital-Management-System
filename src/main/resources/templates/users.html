@@ -40,7 +40,7 @@
                     <th>Last Name</th>
                     <th>Phone Number</th>
                     <th>Email</th>
-                    <th>Date of birth</th>
+                    <th>Age</th>
                     <th>Created Date</th>
                     <th>Modified Date</th>
                     <th>Actions</th>
@@ -52,7 +52,7 @@
                     <td th:text="${user.getLastName()}"></td>
                     <td th:text="${user.getPhoneNumber()}"></td>
                     <td th:text="${user.getEmail()}"></td>
-                    <td th:text="${user.getDateOfBirth()}"></td>
+                    <td th:text="${user.getAge()}"></td>
                     <td th:text="${user.getCreatedDate()}"></td>
                     <td th:text="${user.getModifiedDate()}"></td>
                     <td> <a th:href="@{/user/edit/{id}(id=${user.userId})}">

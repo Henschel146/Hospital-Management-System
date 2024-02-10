@@ -25,7 +25,7 @@ spring:
             client-name: hms-client
             redirect-uri: http://localhost:8080/login/oauth2/code/google
             authorization-grant-type: authorization_code
-            scope: openid
+            scope: openid, profile, email
         provider:
           google:
             issuer-uri: https://accounts.google.com

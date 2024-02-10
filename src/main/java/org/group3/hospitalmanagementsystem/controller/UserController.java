@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static org.group3.hospitalmanagementsystem.Utils.DateUtil.calculateAge;
+
 @Controller
 public class UserController {
 
@@ -28,6 +30,9 @@ public class UserController {
 
         List<User> users = new ArrayList<>();
         users = userService.findAll();
+
+        users.forEach( user -> user.setAge(calculateAge(user.getDateOfBirth())));
+
         model.addAttribute("users",users );
         return "users";
     }

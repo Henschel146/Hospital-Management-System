@@ -32,14 +32,14 @@
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
                                         <label for="firstName" class="form-label">First Name <span
-                                                class="text-red">*</span></label>
+                                                style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-md-9">
                                         <div>
                                             <input type="text" class="form-control"
                                                    id="firstName"
                                                    th:field="*{firstname}"
-                                                   maxlength="255" required>
+                                                   required>
                                             <div class="invalid-feedback">Invalid Description</div>
                                         </div>
                                     </div>
@@ -48,14 +48,14 @@
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
                                         <label for="lastName" class="form-label">Last Name <span
-                                                class="text-red">*</span></label>
+                                                style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
                                             <input type="text" class="form-control"
                                                    id="lastName"
                                                    th:field="*{lastName}"
-                                                   maxlength="255" required>
+                                                    required>
                                             <div class="invalid-feedback">Invalid Description</div>
                                         </div>
                                     </div>
@@ -65,14 +65,14 @@
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-3 align-items-center">
                                         <label for="address" class="form-label">Address <span
-                                                class="text-red">*</span></label>
+                                                style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
                                             <input type="text" class="form-control"
                                                    id="address"
                                                    th:field="*{address}"
-                                                   maxlength="255" required>
+                                                    required>
                                             <div class="invalid-feedback">Invalid Description</div>
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@
                                     <div class="col-md-3 align-items-center">
                                         <label for="phoneNumber" class="form-label">Phone Number
                                             <span
-                                                    class="text-red">*</span></label>
+                                                    style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
@@ -92,7 +92,7 @@
                                                    th:field="*{phoneNumber}"
                                                    required>
                                             <div class="invalid-feedback">Invalid Phone Number
-                                                Quantity
+
                                             </div>
                                         </div>
                                     </div>
@@ -102,13 +102,12 @@
                                     <div class="col-md-3 align-items-center">
                                         <label for="email" class="form-label">Email
                                             <span
-                                                    class="text-red">*</span></label>
+                                                    style="color: red;">*</span></label>
                                     </div>
                                     <div class="col-sm-9">
                                         <div>
                                             <input type="email" class="form-control"
                                                    id="email"
-                                                   name="email" min="0"
                                                    th:field="*{email}"
                                                    required>
                                             <div class="invalid-feedback">Invalid Email
@@ -119,14 +118,14 @@
                                     <div class="row g-3 mb-3">
                                         <div class="col-md-3 align-items-center">
                                             <label for="dateOfBirth" class="form-label">Date Of Birth
-                                                <span class="text-red">*</span></label>
+                                                <span style="color: red;">*</span></label>
                                         </div>
                                         <div class="col-sm-9">
                                             <div>
                                                 <input type="date" class="form-control"
                                                        id="dateOfBirth"
-                                                       th:field="*{dateOfBirth}"
-                                                       required date="dd/mm/yyyy">
+                                                       th:field="*{dateOfBirthString}"
+                                                       required >
                                                 <div class="invalid-feedback">Invalid Promotion Start Date
                                                 </div>
                                             </div>
@@ -137,13 +136,12 @@
                                         <div class="col-md-3 align-items-center">
                                             <label for="diagnosis" class="form-label">Diagnosis
                                                 <span
-                                                        class="text-red">*</span></label>
+                                                        style="color: red;">*</span></label>
                                         </div>
                                         <div class="col-sm-9">
                                             <div>
                                                 <input type="text" class="form-control"
                                                        id="diagnosis"
-                                                       name="email" min="0"
                                                        th:field="*{diagnosis}"
                                                        required>
                                                 <div class="invalid-feedback">Invalid Value

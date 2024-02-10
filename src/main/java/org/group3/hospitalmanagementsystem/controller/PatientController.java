@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import static org.group3.hospitalmanagementsystem.Utils.DateUtil.calculateAge;
 
 @Controller
 public class PatientController {
@@ -27,6 +30,9 @@ public class PatientController {
 
         List<Patient> patients = new ArrayList<>();
         patients = patientService.findAll();
+
+        patients.forEach( patient -> patient.setAge(calculateAge(patient.getDateOfBirth())));
+
         model.addAttribute("patients",patients );
         return "patients";
     }
@@ -39,6 +45,11 @@ public class PatientController {
     @GetMapping("/patient/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         Patient patient = patientService.findById(id).orElseThrow( () -> new NoSuchElementException("Patient with ID " + id + " not found"));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = patient.getDateOfBirth().format(formatter);
+        patient.setDateOfBirthString(formattedDate);
+
         model.addAttribute("patient",patient);
         return "patientUpdate";
     }
@@ -61,6 +72,11 @@ public class PatientController {
     @PostMapping("/patient/update")
     public String updateUser(@ModelAttribute("patient") Patient patient){
         patient.setModifiedDate(LocalDate.now());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateOfBirth = LocalDate.parse(patient.getDateOfBirthString(), formatter);
+        patient.setDateOfBirth(dateOfBirth);
+
         Patient updatedPatient =  patientService.update(patient);
         return "redirect:/patients";
     }
