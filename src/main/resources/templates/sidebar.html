@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-
-
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <div th:fragment = "sidebar">
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh;">
@@ -25,19 +21,20 @@
                     Admissions
                 </a>
             </li>
-            <li class="nav-item" >
+
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')" >
                 <a th:href="@{/user}" class="nav-link link-dark">
                     <i data-feather="users"></i>
                     Users
                 </a>
             </li>
-            <li>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a th:href="@{/doctors}" class="nav-link link-dark">
                     <i data-feather="heart"></i>
                     Doctors
                 </a>
             </li>
-            <li>
+            <li class="nav-item">
                 <a th:href="@{/patients}" class="nav-link link-dark">
                     <i data-feather="user"></i>
                     Patients
@@ -45,6 +42,22 @@
             </li>
         </ul>
         <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- First Div -->
+                    <div th:text="${#authentication.name}">
+                        The value of the "name" property of the authentication object should appear here.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
     </div>
     </div>

@@ -10,8 +10,6 @@ import org.group3.hospitalmanagementsystem.service.DoctorService;
 import org.group3.hospitalmanagementsystem.service.PatientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,13 +45,13 @@ public class AppointmentController {
 
 
     @GetMapping("/appointments")
-    public String showAppointments(Model model, @AuthenticationPrincipal OAuth2User principal) {
+    public String showAppointments(Model model) {
 
         List<Appointment> appointments = appointmentService.findAll();
 
         model.addAttribute("appointments",appointments );
 
-        logger.info("Logged in user name: " + principal.getAttribute("name") );
+
 
         return "appointment";
     }

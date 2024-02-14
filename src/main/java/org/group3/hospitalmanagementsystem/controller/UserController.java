@@ -1,19 +1,23 @@
 package org.group3.hospitalmanagementsystem.controller;
 
+import org.group3.hospitalmanagementsystem.entities.Role;
 import org.group3.hospitalmanagementsystem.entities.User;
+import org.group3.hospitalmanagementsystem.entities.UserRoleMapping;
+import org.group3.hospitalmanagementsystem.service.RoleService;
+import org.group3.hospitalmanagementsystem.service.UserRoleMappingService;
 import org.group3.hospitalmanagementsystem.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.group3.hospitalmanagementsystem.Utils.DateUtil.calculateAge;
 
@@ -22,7 +26,16 @@ public class UserController {
 
     private UserService userService;
 
-    public UserController(UserService userService){this.userService = userService;}
+    private UserRoleMappingService userRoleMappingService;
+
+    private RoleService roleService;
+
+    @Autowired
+    public UserController(UserService userService, RoleService roleService, UserRoleMappingService userRoleMappingService){
+        this.userService = userService;
+        this.roleService = roleService;
+        this.userRoleMappingService = userRoleMappingService;
+    }
 
 
     @GetMapping("/user")
@@ -39,6 +52,8 @@ public class UserController {
     @GetMapping("/user/add")
     public String add(Model model) {
         model.addAttribute("user", new User());
+        List<Role> roles = roleService.findAll();
+        model.addAttribute("roles",roles);
         return "userAdd";
     }
 
@@ -49,8 +64,9 @@ public class UserController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = user.getDateOfBirth().format(formatter);
         user.setDateOfBirthString(formattedDate);
-
         model.addAttribute("user",user);
+        List<Role> roles = roleService.findAll();
+        model.addAttribute("roles",roles);
         return "userUpdate";
     }
 
@@ -62,11 +78,17 @@ public class UserController {
     }
 
     @PostMapping("/users/add")
-    public String addNewUser(@ModelAttribute("user") User user){
+    public String addNewUser(@ModelAttribute("user") User user, @RequestParam("selectedRoles") Set<Integer> selectedRoleIds){
         user.setCreatedDate(LocalDate.now());
         user.setModifiedDate(LocalDate.now());
         User createdUser =  userService.create(user);
+        Integer userId = createdUser.getUserId();
 
+        List<UserRoleMapping> userRoleMappings = selectedRoleIds.stream()
+                .map(roleId -> new UserRoleMapping(userId, roleId))
+                .collect(Collectors.toList());
+
+        userRoleMappings.forEach(userRoleMapping -> userRoleMappingService.create(userRoleMapping));
         return "redirect:/user";
     }
 

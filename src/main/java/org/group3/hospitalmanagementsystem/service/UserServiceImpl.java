@@ -1,23 +1,38 @@
 package org.group3.hospitalmanagementsystem.service;
 
+import org.group3.hospitalmanagementsystem.entities.Role;
 import org.group3.hospitalmanagementsystem.entities.User;
 import org.group3.hospitalmanagementsystem.repository.UserRepository;
+import org.group3.hospitalmanagementsystem.repository.UserRoleMappingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service("userService")
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService , UserDetailsService {
 
     private UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    private PasswordEncoder passwordEncoder;
+
+    private UserRoleMappingRepository userRoleMappingRepository;
+
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, UserRoleMappingRepository userRoleMappingRepository) {
         this.userRepository = userRepository;
+        this.userRoleMappingRepository = userRoleMappingRepository;
     }
 
     @Override
@@ -27,6 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -43,7 +59,10 @@ public class UserServiceImpl implements UserService {
         existingUser.setFirstname(user.getFirstname());
         existingUser.setDateOfBirth(user.getDateOfBirth());
         existingUser.setPhoneNumber(user.getPhoneNumber());
-        existingUser.setPassword(user.getPassword());
+
+        if (!existingUser.getPassword().equals(user.getPassword())) {
+            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
 
         return userRepository.save(existingUser);
     }
@@ -51,6 +70,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void batch() {
 
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -67,4 +91,24 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findById(Integer id){
         return userRepository.findById(id);
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+
+        Set<Role> roles = userRoleMappingRepository.findRolesByUserId(user.getUserId());
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(), user.getPassword(), getAuthorities(roles));
+    }
+
+    private Collection<? extends GrantedAuthority> getAuthorities(Set<Role> roles) {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
+                .collect(Collectors.toList());
+    }
+
 }

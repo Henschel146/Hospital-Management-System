@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Appointments</title>
@@ -31,7 +31,7 @@
     <div class="content" id="content">
         <div class="container-fluid">
             <h2 class="mb-3 mt-3">Appointments</h2>
-            <a th:href="@{/appointment/add}" class="btn btn-primary mb-3"> <i data-feather="plus-circle"></i> Schedule Appointment</a>
+            <a th:href="@{/appointment/add}" class="btn btn-primary mb-3" sec:authorize="hasRole('ROLE_RECEPTIONIST')"> <i data-feather="plus-circle" ></i> Schedule Appointment</a>
 
             <table class="table no-margin  table-bordered table-striped" >
                 <thead>
@@ -44,7 +44,7 @@
                     <th>Notes</th>
                     <th>Created Date</th>
                     <th>Modified Date</th>
-                    <th>Actions</th>
+                    <th sec:authorize="hasRole('ROLE_RECEPTIONIST')">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,7 +57,7 @@
                     <td th:text="${appointment.notes}"></td>
                     <td th:text="${appointment.createdDate}"></td>
                     <td th:text="${appointment.modifiedDate}"></td>
-                    <td> <a th:href="@{/appointment/edit/{id}(id=${appointment.appointmentId})}">
+                    <td sec:authorize="hasRole('ROLE_RECEPTIONIST')"> <a th:href="@{/appointment/edit/{id}(id=${appointment.appointmentId})}">
                         <i style="color: black;" data-feather="edit"></i>
                     </a>
                         <a th:href="@{/appointment/delete/{id}(id=${appointment.appointmentId})}" onclick="return confirm('Are you sure?')">

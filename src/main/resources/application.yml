@@ -14,18 +14,18 @@ spring:
   sql:
     init:
       mode: always
-  security:
-    oauth2:
-      client:
-        registration:
-          hospital-management-system:
-            provider: google
-            client-id: 478338064853-bk1qo2vbnu42kr8rkpte5ocas54o823n.apps.googleusercontent.com
-            client-secret: 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
-            client-name: hms-client
-            redirect-uri: http://localhost:8080/login/oauth2/code/google
-            authorization-grant-type: authorization_code
-            scope: openid, profile, email
-        provider:
-          google:
-            issuer-uri: https://accounts.google.com
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          hospital-management-system:
+#            provider: google
+#            client-id: 478338064853-bk1qo2vbnu42kr8rkpte5ocas54o823n.apps.googleusercontent.com
+#            client-secret: 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
+#            client-name: hms-client
+#            redirect-uri: http://localhost:8080/login/oauth2/code/google
+#            authorization-grant-type: authorization_code
+#            scope: openid, profile, email
+#        provider:
+#          google:
+#            issuer-uri: https://accounts.google.com

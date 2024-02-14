@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Patients</title>
@@ -31,7 +31,7 @@
     <div class="content" id="content">
         <div class="container-fluid">
             <h2 class="mb-3 mt-3">Patients</h2>
-            <a th:href="@{/patient/add}" class="btn btn-primary mb-3"><i data-feather="plus-circle"></i> Add Patient</a>
+            <a th:href="@{/patient/add}" class="btn btn-primary mb-3" sec:authorize="hasRole('ROLE_RECEPTIONIST')"><i data-feather="plus-circle"></i> Add Patient</a>
 
             <table class="table no-margin  table-bordered table-striped" >
                 <thead>
@@ -45,7 +45,7 @@
                     <th>Diagnosis</th>
                     <th>Created Date</th>
                     <th>Modified Date</th>
-                    <th>Actions</th>
+                    <th sec:authorize="hasRole('ROLE_RECEPTIONIST')">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,7 +59,7 @@
                     <td th:text="${patient.diagnosis}"></td>
                     <td th:text="${patient.createdDate}"></td>
                     <td th:text="${patient.modifiedDate}"></td>
-                    <td> <a th:href="@{/patient/edit/{id}(id=${patient.patientId})}">
+                    <td sec:authorize="hasRole('ROLE_RECEPTIONIST')"> <a th:href="@{/patient/edit/{id}(id=${patient.patientId})}">
                         <i style="color: black;" data-feather="edit"></i>
                     </a>
                         <a th:href="@{/patient/delete/{id}(id=${patient.patientId})}" onclick="return confirm('Are you sure?')">
