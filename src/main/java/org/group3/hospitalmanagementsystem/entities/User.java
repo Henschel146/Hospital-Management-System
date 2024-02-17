@@ -3,6 +3,7 @@ package org.group3.hospitalmanagementsystem.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 //28.01.2024 @karimberdiDekhkonov
 @Entity
@@ -35,6 +36,9 @@ public class User {
     private LocalDate createdDate;
 
     private LocalDate modifiedDate;
+
+    @OneToMany(mappedBy = "user")
+    private Set<UserRoleMapping> userRoleMappings;
 
     public User() {
     }

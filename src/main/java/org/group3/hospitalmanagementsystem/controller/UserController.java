@@ -1,8 +1,10 @@
 package org.group3.hospitalmanagementsystem.controller;
 
 import org.group3.hospitalmanagementsystem.entities.Role;
+import org.group3.hospitalmanagementsystem.entities.RoleGroup;
 import org.group3.hospitalmanagementsystem.entities.User;
 import org.group3.hospitalmanagementsystem.entities.UserRoleMapping;
+import org.group3.hospitalmanagementsystem.service.RoleGroupService;
 import org.group3.hospitalmanagementsystem.service.RoleService;
 import org.group3.hospitalmanagementsystem.service.UserRoleMappingService;
 import org.group3.hospitalmanagementsystem.service.UserService;
@@ -30,11 +32,14 @@ public class UserController {
 
     private RoleService roleService;
 
+    private RoleGroupService roleGroupService;
+
     @Autowired
-    public UserController(UserService userService, RoleService roleService, UserRoleMappingService userRoleMappingService){
+    public UserController(UserService userService, RoleService roleService, UserRoleMappingService userRoleMappingService, RoleGroupService roleGroupService){
         this.userService = userService;
         this.roleService = roleService;
         this.userRoleMappingService = userRoleMappingService;
+        this.roleGroupService = roleGroupService;
     }
 
 
@@ -85,7 +90,22 @@ public class UserController {
         Integer userId = createdUser.getUserId();
 
         List<UserRoleMapping> userRoleMappings = selectedRoleIds.stream()
-                .map(roleId -> new UserRoleMapping(userId, roleId))
+                .map(roleId -> {
+                    Role role = roleService.findById(roleId).orElse(null);
+                    UserRoleMapping userRoleMapping = new UserRoleMapping(userId, roleId);
+
+                    // Check if the role corresponds to "RECEPTIONIST" or "Doctor"
+                    if (role != null && ("ADMIN".equals(role.getName()) || "DOCTOR".equals(role.getName()))) {
+                        // Set the role group to "Management"
+                        RoleGroup managementRoleGroup = roleGroupService.findByGroupName("MANAGEMENT").orElseThrow( () -> new NoSuchElementException("RoleGroup with Name  Management  not found"));
+                        userRoleMapping.setUrRoleGroup(managementRoleGroup);
+                    }else{
+                        RoleGroup managementRoleGroup = roleGroupService.findByGroupName("GENERAL").orElseThrow( () -> new NoSuchElementException("RoleGroup with Name  Management  not found"));
+                        userRoleMapping.setUrRoleGroup(managementRoleGroup);
+                    }
+
+                    return userRoleMapping;
+                })
                 .collect(Collectors.toList());
 
         userRoleMappings.forEach(userRoleMapping -> userRoleMappingService.create(userRoleMapping));

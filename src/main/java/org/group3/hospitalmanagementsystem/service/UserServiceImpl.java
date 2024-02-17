@@ -1,7 +1,9 @@
 package org.group3.hospitalmanagementsystem.service;
 
 import org.group3.hospitalmanagementsystem.entities.Role;
+import org.group3.hospitalmanagementsystem.entities.RoleGroup;
 import org.group3.hospitalmanagementsystem.entities.User;
+import org.group3.hospitalmanagementsystem.entities.UserRoleMapping;
 import org.group3.hospitalmanagementsystem.repository.UserRepository;
 import org.group3.hospitalmanagementsystem.repository.UserRoleMappingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,16 +101,31 @@ public class UserServiceImpl implements UserService , UserDetailsService {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
+        Set<UserRoleMapping> userRoleMappings = userRoleMappingRepository.findByUser(user);
+
         Set<Role> roles = userRoleMappingRepository.findRolesByUserId(user.getUserId());
 
+        Set<RoleGroup> roleGroups = userRoleMappings.stream()
+                .map(UserRoleMapping::getUrRoleGroup)
+                .collect(Collectors.toSet());
+
         return new org.springframework.security.core.userdetails.User(
-                user.getUsername(), user.getPassword(), getAuthorities(roles));
+                user.getUsername(), user.getPassword(), getAuthorities(roles, roleGroups));
     }
 
-    private Collection<? extends GrantedAuthority> getAuthorities(Set<Role> roles) {
-        return roles.stream()
+    private Collection<? extends GrantedAuthority> getAuthorities(Set<Role> roles, Set<RoleGroup> roleGroups) {
+
+        Set<GrantedAuthority> authorities = new HashSet<>();
+
+        authorities.addAll(roles.stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet()));
+
+        authorities.addAll(roleGroups.stream()
+                .map(roleGroup -> new SimpleGrantedAuthority("GROUP_" + roleGroup.getGroupName()))
+                .collect(Collectors.toSet()));
+
+        return authorities;
     }
 
 }

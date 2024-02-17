@@ -28,7 +28,7 @@
                     Users
                 </a>
             </li>
-            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+            <li class="nav-item" sec:authorize="hasAuthority('GROUP_MANAGEMENT')">
                 <a th:href="@{/doctors}" class="nav-link link-dark">
                     <i data-feather="heart"></i>
                     Doctors

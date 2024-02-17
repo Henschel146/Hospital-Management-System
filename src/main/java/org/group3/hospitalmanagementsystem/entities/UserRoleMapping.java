@@ -15,9 +15,13 @@ public class UserRoleMapping {
     @JoinColumn(name = "user_role_id", referencedColumnName = "role_id", insertable = false, updatable = false)
     private Role role;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "ur_user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "ur_role_group_id", referencedColumnName = "rg_id")
+    private RoleGroup urRoleGroup;
 
     @Column(name = "ur_user_id")
     private int userId;
@@ -55,5 +59,13 @@ public class UserRoleMapping {
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    public RoleGroup getUrRoleGroup() {
+        return urRoleGroup;
+    }
+
+    public void setUrRoleGroup(RoleGroup urRoleGroup) {
+        this.urRoleGroup = urRoleGroup;
     }
 }
