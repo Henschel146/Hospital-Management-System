@@ -134,6 +134,17 @@
 
                                     </div>
 
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-3 align-items-center">
+                                            <label for="userRoleMappings" class="form-label">User Role And Group</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div th:each="userRoleMapping : ${user.userRoleMappings}">
+                                                <span class="form-control" id="userRoleMappings" th:text="'Role: ' + ${userRoleMapping.role.name} + ' - Group: ' + ${userRoleMapping.urRoleGroup.groupName}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                 </div>
 

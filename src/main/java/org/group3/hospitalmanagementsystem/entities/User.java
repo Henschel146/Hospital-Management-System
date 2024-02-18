@@ -37,7 +37,7 @@ public class User {
 
     private LocalDate modifiedDate;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Set<UserRoleMapping> userRoleMappings;
 
     public User() {
@@ -149,5 +149,13 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Set<UserRoleMapping> getUserRoleMappings() {
+        return userRoleMappings;
+    }
+
+    public void setUserRoleMappings(Set<UserRoleMapping> userRoleMappings) {
+        this.userRoleMappings = userRoleMappings;
     }
 }

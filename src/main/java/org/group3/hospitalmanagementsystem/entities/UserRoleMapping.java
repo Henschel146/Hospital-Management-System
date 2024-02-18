@@ -68,4 +68,20 @@ public class UserRoleMapping {
     public void setUrRoleGroup(RoleGroup urRoleGroup) {
         this.urRoleGroup = urRoleGroup;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
